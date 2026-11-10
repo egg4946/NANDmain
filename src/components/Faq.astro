@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import mascot from "../assets/mascot.png";
+---
+
+<section class="section faq" id="faq" aria-labelledby="faq-title">
+  <div class="container faq-layout">
+    <div class="faq-head" data-reveal>
+      <h2 class="section-title" id="faq-title">よくある質問</h2>
+      <p>ここにない質問も、Xから気軽にどうぞ。</p>
+    </div>
+    <div class="faq-list" data-reveal>
+      <details>
+        <summary>初心者でも参加できますか？<span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-answer">
+          <p>できます。基礎を学びながら、小さな制作物を一緒に完成させるところから始められます。</p>
+        </div>
+      </details>
+      <details>
+        <summary>どんな技術を扱いますか？<span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-answer">
+          <p>Web、スマホアプリ、AI、ゲーム、ハードウェアなど、メンバーの興味に合わせて広げていきます。</p>
+        </div>
+      </details>
+      <details>
+        <summary>入会前に見学できますか？<span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-answer">
+          <p>できます。Xから気軽に連絡してください。活動日や場所が決まり次第ご案内します。</p>
+        </div>
+      </details>
+      <details>
+        <summary>学年や学部に条件はありますか？<span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-answer">
+          <p>ありません。南山大学の学生であれば、学年・学部を問わず歓迎しています。</p>
+        </div>
+      </details>
+      <details>
+        <summary>必要なものはありますか？<span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-answer">
+          <p>PCがあればすぐに参加できます。活動は対面とオンラインを組み合わせて行います。</p>
+        </div>
+      </details>
+    </div>
+  </div>
+  <div class="mascot" data-reveal>
+    <Image src={mascot} alt="「気軽にどうぞ！」と手を振るNANDのマスコット" width={480} />
+  </div>
+</section>

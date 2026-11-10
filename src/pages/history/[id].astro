@@ -1,0 +1,84 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../lib/url";
+import { formatDate } from "../../lib/date";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("history", ({ data }) => !data.draft);
+  return entries.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.summary} solidHeader>
+  <main id="main" class="article">
+    <div class="container article-inner">
+      <a class="text-link back" href={withBase("/#history")}>← 過去の活動へ戻る</a>
+      <header>
+        <time datetime={entry.data.date.toISOString().slice(0, 10)}>{formatDate(entry.data.date)}</time>
+        <h1>{entry.data.title}</h1>
+        {
+          entry.data.tags.length > 0 && (
+            <ul class="chips">
+              {entry.data.tags.map((tag) => (
+                <li>{tag}</li>
+              ))}
+            </ul>
+          )
+        }
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .article {
+    padding-block: clamp(120px, 14vw, 168px) clamp(72px, 8vw, 104px);
+  }
+
+  .article-inner {
+    max-width: 760px;
+  }
+
+  .back {
+    margin: 0 0 32px;
+  }
+
+  time {
+    display: block;
+    color: var(--signal);
+    font-family: var(--font-en);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  h1 {
+    margin: 8px 0 16px;
+    font-size: clamp(28px, 4.5vw, 44px);
+    line-height: 1.35;
+  }
+
+  .prose {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+
+  .prose :global(a) {
+    color: var(--signal);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .prose :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+</style>

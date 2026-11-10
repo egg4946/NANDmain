@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import mark from "../assets/nand-mark.png";
+import XLogo from "./XLogo.astro";
+import { withBase } from "../lib/url";
+import { navLinks, X_URL } from "../lib/links";
+
+interface Props {
+  /** 暗いヒーローがないページでは、最初からスクロール後の白いヘッダーにする */
+  solid?: boolean;
+}
+
+const { solid = false } = Astro.props;
+const home = withBase("/");
+---
+
+<header class:list={["site-header", { "is-scrolled": solid }]} data-header data-solid={solid ? "" : undefined}>
+  <a class="brand" href={`${home}#top`} aria-label="NAND トップへ">
+    <span class="brand-mark"><Image src={mark} alt="" width={96} /></span>
+    <span class="brand-text">NAND</span>
+  </a>
+  <button class="nav-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <nav class="site-nav" id="site-nav" aria-label="メインメニュー" data-nav>
+    {navLinks.map((link) => <a href={`${home}${link.hash}`}>{link.label}</a>)}
+    <a class="nav-cta" href={X_URL} target="_blank" rel="noreferrer">
+      <XLogo />
+      Xで連絡する
+    </a>
+  </nav>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-header]")!;
+  const nav = document.querySelector<HTMLElement>("[data-nav]")!;
+  const navToggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]")!;
+
+  const isSolid = header.hasAttribute("data-solid");
+
+  const syncHeader = () => {
+    if (isSolid) return;
+    header.classList.toggle("is-scrolled", window.scrollY > 18);
+  };
+
+  const closeNav = () => {
+    nav.classList.remove("is-open");
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-label", "メニューを開く");
+  };
+
+  syncHeader();
+  window.addEventListener("scroll", syncHeader, { passive: true });
+
+  navToggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
+  });
+
+  nav.addEventListener("click", (event) => {
+    if ((event.target as Element).closest("a")) {
+      closeNav();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && nav.classList.contains("is-open")) {
+      closeNav();
+      navToggle.focus();
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (nav.classList.contains("is-open") && !header.contains(event.target as Node)) {
+      closeNav();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 960) {
+      closeNav();
+    }
+  });
+</script>

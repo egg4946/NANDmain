@@ -1,0 +1,120 @@
+---
+---
+
+<section class="section about" id="about" aria-labelledby="about-title">
+  <div class="container about-layout">
+    <div class="about-copy" data-reveal>
+      <h2 class="section-title" id="about-title">NANDについて</h2>
+      <p class="lead">「作りたい」を持ち寄って、<br />形にする場所。</p>
+      <p>
+        NANDは、南山大学の学生が立ち上げたエンジニア団体です。Web、アプリ、AI、ゲームなど、技術領域を限定せずに「作りたい」を出発点に活動します。
+      </p>
+      <p>
+        授業だけでは触れにくい開発の進め方、GitHubでの共同制作、発表、ポートフォリオ作りまで。初心者も経験者も、一緒に伸びていける場所を目指しています。
+      </p>
+      <dl class="facts">
+        <div>
+          <dt>設立</dt>
+          <dd>2026年</dd>
+        </div>
+        <div>
+          <dt>対象</dt>
+          <dd>南山大学の学生（学年・学部不問）</dd>
+        </div>
+        <div>
+          <dt>経験</dt>
+          <dd>不問。基礎から一緒に始められます</dd>
+        </div>
+      </dl>
+    </div>
+
+    <figure class="gate-card" data-reveal data-gate data-a="0" data-b="0">
+      <figcaption class="gate-caption">
+        <strong>名前の由来は、論理回路のNANDゲート</strong>
+        <span>NANDゲートは、組み合わせるだけでどんな論理回路も作れる基本素子です。入力A・Bを押して動かしてみてください。</span>
+      </figcaption>
+      <div class="gate-stage">
+        <div class="gate-inputs">
+          <button class="gate-input" type="button" aria-pressed="false" data-input="a">
+            <span class="gate-input-name">A</span><span class="gate-input-value" data-value>0</span>
+          </button>
+          <button class="gate-input" type="button" aria-pressed="false" data-input="b">
+            <span class="gate-input-name">B</span><span class="gate-input-value" data-value>0</span>
+          </button>
+        </div>
+        <svg class="gate-svg" viewBox="0 25 300 150" aria-hidden="true">
+          <defs>
+            <radialGradient id="gate-glow">
+              <stop offset="0" stop-color="#5aa2ff" stop-opacity="0.9" />
+              <stop offset="1" stop-color="#5aa2ff" stop-opacity="0" />
+            </radialGradient>
+            <linearGradient id="gate-metal" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2c3f66" />
+              <stop offset="1" stop-color="#13203a" />
+            </linearGradient>
+          </defs>
+          <path class="wire wire-a" d="M0 70 H96" />
+          <path class="wire wire-b" d="M0 130 H96" />
+          <path class="wire wire-out" d="M226 100 H300" />
+          <path class="gate-body" d="M96 40 H156 A60 60 0 0 1 156 160 H96 Z" />
+          <circle class="gate-glow" cx="227" cy="100" r="30" fill="url(#gate-glow)" />
+          <circle class="gate-bubble" cx="227" cy="100" r="10" />
+        </svg>
+        <p class="gate-output">出力 <strong data-output>1</strong></p>
+      </div>
+      <table class="truth-table">
+        <caption class="visually-hidden">NANDゲートの真理値表</caption>
+        <thead>
+          <tr><th scope="col">A</th><th scope="col">B</th><th scope="col">出力</th></tr>
+        </thead>
+        <tbody>
+          <tr data-row="00"><td>0</td><td>0</td><td>1</td></tr>
+          <tr data-row="01"><td>0</td><td>1</td><td>1</td></tr>
+          <tr data-row="10"><td>1</td><td>0</td><td>1</td></tr>
+          <tr data-row="11"><td>1</td><td>1</td><td>0</td></tr>
+        </tbody>
+      </table>
+      <p class="visually-hidden" aria-live="polite" data-gate-status></p>
+    </figure>
+  </div>
+</section>
+
+<script>
+  // NANDゲートの体験: 入力A・Bを押すと出力と真理値表が切り替わる
+  const gate = document.querySelector<HTMLElement>("[data-gate]");
+
+  if (gate) {
+    const inputs = gate.querySelectorAll<HTMLButtonElement>("[data-input]");
+    const output = gate.querySelector<HTMLElement>("[data-output]")!;
+    const status = gate.querySelector<HTMLElement>("[data-gate-status]")!;
+    const rows = gate.querySelectorAll<HTMLElement>("[data-row]");
+
+    const render = (announce: boolean) => {
+      const a = gate.dataset.a;
+      const b = gate.dataset.b;
+      const out = a === "1" && b === "1" ? "0" : "1";
+
+      gate.dataset.out = out;
+      output.textContent = out;
+      rows.forEach((row) => row.classList.toggle("is-active", row.dataset.row === `${a}${b}`));
+
+      if (announce) {
+        status.textContent = `入力A ${a}、入力B ${b}、出力 ${out}`;
+      }
+    };
+
+    inputs.forEach((button) => {
+      button.addEventListener("click", () => {
+        const key = button.dataset.input as "a" | "b";
+        const next = gate.dataset[key] === "1" ? "0" : "1";
+
+        gate.dataset[key] = next;
+        button.setAttribute("aria-pressed", String(next === "1"));
+        button.querySelector("[data-value]")!.textContent = next;
+        render(true);
+      });
+    });
+
+    render(false);
+  }
+</script>
