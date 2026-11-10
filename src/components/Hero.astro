@@ -1,29 +1,71 @@
 ---
-import { Image } from "astro:assets";
-import heroImage from "../assets/head.png";
-import { X_URL } from "../lib/links";
 ---
 
-<section class="hero">
-  <Image
-    class="hero-image"
-    src={heroImage}
-    alt="NANDのロゴと回路をモチーフにしたキービジュアル"
-    widths={[640, 1280, 1920]}
-    sizes="100vw"
-    loading="eager"
-    fetchpriority="high"
-  />
-  <div class="hero-shade" aria-hidden="true"></div>
-  <div class="hero-content">
-    <h1>NAND</h1>
+<section class="hero" id="top">
+  <div class="hero-visual" aria-hidden="true">
+    <svg viewBox="0 0 640 560">
+      <defs>
+        <radialGradient id="hero-led-glow">
+          <stop offset="0" stop-color="#5aa2ff" stop-opacity="0.95" />
+          <stop offset="1" stop-color="#5aa2ff" stop-opacity="0" />
+        </radialGradient>
+        <linearGradient id="hero-gate-fill" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#3b5588" />
+          <stop offset="1" stop-color="#1a2a4c" />
+        </linearGradient>
+        <filter id="hero-pulse-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <g class="hero-pcb">
+        <path d="M20 110 H120 V50 H260" pathLength="1000" />
+        <path d="M624 30 V120 H520" pathLength="1000" />
+        <path d="M40 480 H130 V410" pathLength="1000" />
+        <path d="M630 530 H500 V490" pathLength="1000" />
+        <circle cx="260" cy="50" r="6" />
+        <circle cx="520" cy="120" r="6" />
+        <circle cx="130" cy="410" r="6" />
+        <circle cx="500" cy="490" r="6" />
+      </g>
+      <path class="hero-hex" d="M380 80 L553 180 V380 L380 480 L207 380 V180 Z" pathLength="1000" />
+      <path class="hero-trace" d="M180 -10 V240 H300" pathLength="1000" />
+      <path class="hero-trace" d="M240 570 V320 H300" pathLength="1000" />
+      <path class="hero-trace" d="M472 280 H590 V440 H650" pathLength="1000" />
+      <g filter="url(#hero-pulse-glow)">
+        <path class="hero-pulse pulse-a" d="M180 -10 V240 H300" pathLength="1000" />
+        <path class="hero-pulse pulse-b" d="M240 570 V320 H300" pathLength="1000" />
+        <path class="hero-pulse pulse-out" d="M472 280 H590 V440 H650" pathLength="1000" />
+      </g>
+      <path class="hero-gate" d="M300 200 H360 A80 80 0 0 1 360 360 H300 Z" />
+      <circle class="hero-led-glow" cx="456" cy="280" r="60" fill="url(#hero-led-glow)" />
+      <circle class="hero-led" cx="456" cy="280" r="14" />
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <h1 class="hero-title">
+      <span class="hero-org">南山大学 学生エンジニア団体 NAND</span>
+      <span class="line"><span>作りながら、</span></span>
+      <span class="line"><span>学び合う。</span></span>
+    </h1>
+    <span class="hero-signal" aria-hidden="true"></span>
     <p class="hero-copy">
-      南山大学で生まれた、学生エンジニアのための制作コミュニティ。
-      コードを書き、手を動かし、仲間と一緒にプロダクトを形にします。
+      プログラミング経験の有無にかかわらず、Web・アプリ・ハードウェアなど「作りたい」を持ち寄って、仲間と一緒に形にしていく場所です。
     </p>
     <div class="hero-actions">
       <a class="button primary" href="#join">参加について見る</a>
-      <a class="button ghost" href={X_URL} target="_blank" rel="noreferrer">Xをフォロー</a>
+      <a class="button ghost" href="https://x.com/nandsongen" target="_blank" rel="noreferrer">
+        <svg class="x-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L2.8 2h6.4l4.4 5.9L18.9 2Zm-1.1 18.1h1.7L7.9 3.8H6.1l11.7 16.3Z" /></svg>
+        Xで連絡する
+      </a>
     </div>
+    <ul class="hero-points" aria-label="参加の目安">
+      <li>初心者歓迎</li>
+      <li>学年・学部不問</li>
+      <li>見学歓迎</li>
+    </ul>
   </div>
 </section>

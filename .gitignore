@@ -17,3 +17,7 @@ npm-debug.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# local tools
+.claude/launch.json
+skills/

@@ -1,35 +1,64 @@
 ---
-import { Image } from "astro:assets";
-import SectionHead from "./SectionHead.astro";
-import activityImage from "../assets/hero-nand.png";
-
-const activities = [
-  { title: "楽しく開発", body: "各自またはグループの制作や学習を進める。詰まったところはその場で相談できます。" },
-  { title: "LT・勉強会", body: "最近学んだ技術、作ったもの、失敗談を短く共有して知識を循環させます。" },
-  { title: "チーム制作", body: "Webサイト、アプリ、ゲーム、ハードウェアなどを企画から公開まで進めます。" },
-  { title: "ハッカソン参加", body: "学外イベントやコンテストにも挑戦し、実践経験とつながりを増やします。" },
-];
 ---
 
-<section class="band" id="activities">
-  <SectionHead eyebrow="Activities" title="NANDでできること" />
-  <div class="activity-visual">
-    <Image
-      src={activityImage}
-      alt="学生がノートPCと電子工作を囲んで制作しているイラスト"
-      widths={[640, 1120, 1680]}
-      sizes="(max-width: 1200px) 100vw, 1120px"
-    />
-  </div>
-  <div class="activity-grid">
-    {
-      activities.map((activity, i) => (
-        <article>
-          <span class="card-index">{String(i + 1).padStart(2, "0")}</span>
-          <h3>{activity.title}</h3>
-          <p>{activity.body}</p>
-        </article>
-      ))
-    }
+<section class="section activities" id="activities" aria-labelledby="activities-title">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2 class="section-title" id="activities-title">主な活動内容</h2>
+      <p class="lead">一人で黙々と、みんなでわいわい。<br />作り方は自由に選べます。</p>
+    </div>
+    <ul class="activity-grid">
+      <li class="activity" data-reveal style="--i: 0">
+        <svg class="activity-icon" viewBox="0 0 48 48" aria-hidden="true">
+          <rect x="7" y="10" width="34" height="22" rx="3" />
+          <path d="M3 38 H45" />
+          <path d="M19 17 l-4 4 4 4 M29 17 l4 4 -4 4" />
+          <circle class="icon-led" cx="36" cy="15" r="2" />
+        </svg>
+        <h3>楽しく開発</h3>
+        <p>各自またはグループで制作や学習を進めます。詰まったところはその場で相談できます。</p>
+      </li>
+      <li class="activity" data-reveal style="--i: 1">
+        <svg class="activity-icon" viewBox="0 0 48 48" aria-hidden="true">
+          <rect x="6" y="7" width="36" height="24" rx="3" />
+          <path d="M24 31 V39 M16 41 H32" />
+          <path d="M13 24 l7 -7 5 5 9 -9" />
+          <circle class="icon-led" cx="34" cy="13" r="2.5" />
+        </svg>
+        <h3>LT・勉強会</h3>
+        <p>最近学んだ技術、作ったもの、失敗談を短く共有して、知識を循環させます。</p>
+      </li>
+      <li class="activity" data-reveal style="--i: 2">
+        <svg class="activity-icon" viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="11" r="5" />
+          <circle cx="10" cy="36" r="5" />
+          <circle cx="38" cy="36" r="5" />
+          <path d="M21 15.5 L13 31.5 M27 15.5 L35 31.5 M15 36 H33" />
+          <circle class="icon-led" cx="24" cy="11" r="2" />
+        </svg>
+        <h3>チーム制作</h3>
+        <p>Webサイト、アプリ、ゲーム、ハードウェアなどを、企画から公開まで進めます。</p>
+      </li>
+      <li class="activity" data-reveal style="--i: 3">
+        <svg class="activity-icon" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M12 43 V6" />
+          <path d="M12 8 H36 L31 15 L36 22 H12" />
+          <circle class="icon-led" cx="12" cy="43" r="2.5" />
+        </svg>
+        <h3>ハッカソン参加</h3>
+        <p>学外イベントやコンテストにも挑戦し、実践経験とつながりを増やします。</p>
+      </li>
+    </ul>
+    <div class="fields" data-reveal>
+      <p class="fields-label">扱う分野の例</p>
+      <ul class="chips">
+        <li>Web</li>
+        <li>スマホアプリ</li>
+        <li>AI</li>
+        <li>ゲーム</li>
+        <li>ハードウェア</li>
+      </ul>
+      <p class="fields-note">メンバーの興味に合わせて広げていきます。</p>
+    </div>
   </div>
 </section>

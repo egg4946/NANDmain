@@ -1,12 +1,18 @@
 ---
-import { X_URL } from "../lib/links";
 ---
 
-<section class="contact" id="contact">
-  <div>
-    <p class="eyebrow">Contact</p>
-    <h2>NANDで一緒に作りませんか。</h2>
-    <p>見学、入会相談はXからどうぞ。</p>
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="container contact-inner" data-reveal>
+    <div class="contact-copy">
+      <h2 id="contact-title">まずは、見学から。</h2>
+      <p>見学や入会の相談は、Xで受け付けています。「ちょっと気になる」くらいの気持ちで大丈夫です。</p>
+    </div>
+    <div class="contact-actions">
+      <a class="button invert" href="https://x.com/nandsongen" target="_blank" rel="noreferrer">
+        <svg class="x-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L2.8 2h6.4l4.4 5.9L18.9 2Zm-1.1 18.1h1.7L7.9 3.8H6.1l11.7 16.3Z" /></svg>
+        Xで連絡する
+      </a>
+      <span class="contact-handle">@nandsongen</span>
+    </div>
   </div>
-  <a class="button primary" href={X_URL} target="_blank" rel="noreferrer">Xで連絡する</a>
 </section>

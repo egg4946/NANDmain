@@ -1,42 +1,60 @@
 ---
-import SectionHead from "./SectionHead.astro";
-
-const checks = [
-  "南山大学の学生なら学年・学部を問わず歓迎",
-  "PCを持っていればすぐ参加可能",
-  "見学、相談、共同制作の持ち込みも歓迎",
-];
-
-const schedule = [
-  { term: "形式", detail: "対面 + オンライン" },
-  { term: "頻度", detail: "週1回を目安に調整中" },
-  { term: "場所", detail: "南山大学キャンパス内" },
-];
 ---
 
-<section class="join band" id="join">
-  <SectionHead eyebrow="Join NAND" title="経験より、作ってみたい気持ち。" />
-  <div class="join-layout">
-    <div class="join-copy">
-      <p>
+<section class="section join" id="join" aria-labelledby="join-title">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2 class="section-title" id="join-title">参加案内</h2>
+      <p class="lead">経験より、作ってみたい気持ち。</p>
+      <p class="join-intro">
         プログラミング経験の有無は問いません。最初はHTML/CSSやPythonの基礎からでも大丈夫です。経験者は、チーム開発や外部イベントでさらに腕を伸ばせます。
       </p>
-      <ul class="check-list">
-        {checks.map((item) => <li>{item}</li>)}
-      </ul>
     </div>
-    <aside class="schedule">
-      <h3>活動予定</h3>
-      <dl>
-        {
-          schedule.map((row) => (
-            <div>
-              <dt>{row.term}</dt>
-              <dd>{row.detail}</dd>
-            </div>
-          ))
-        }
-      </dl>
-    </aside>
+
+    <ol class="steps" data-reveal>
+      <li class="step">
+        <span class="step-num" aria-hidden="true">1</span>
+        <h3>Xで連絡する</h3>
+        <p>「見学したい」「話を聞いてみたい」と、気軽に一言送ってください。</p>
+      </li>
+      <li class="step">
+        <span class="step-num" aria-hidden="true">2</span>
+        <h3>活動を見学する</h3>
+        <p>活動日と場所をご案内します。雰囲気を見てから決められます。</p>
+      </li>
+      <li class="step">
+        <span class="step-num" aria-hidden="true">3</span>
+        <h3>一緒に作り始める</h3>
+        <p>PCがあればすぐ参加できます。まずは小さな制作物から始めましょう。</p>
+      </li>
+    </ol>
+
+    <div class="join-details" data-reveal>
+      <div class="join-panel">
+        <h3>こんな人を歓迎しています</h3>
+        <ul class="check-list">
+          <li>南山大学の学生なら、学年・学部を問わず歓迎</li>
+          <li>PCを持っていれば、すぐに参加できます</li>
+          <li>見学、相談、共同制作の持ち込みも歓迎</li>
+        </ul>
+      </div>
+      <div class="join-panel">
+        <h3>活動の形式</h3>
+        <dl class="schedule">
+          <div>
+            <dt>形式</dt>
+            <dd>対面 + オンライン</dd>
+          </div>
+          <div>
+            <dt>頻度</dt>
+            <dd>週1回を目安に調整中</dd>
+          </div>
+          <div>
+            <dt>場所</dt>
+            <dd>南山大学キャンパス内</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
   </div>
 </section>

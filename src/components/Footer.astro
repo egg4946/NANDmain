@@ -1,9 +1,24 @@
 ---
 import { Image } from "astro:assets";
-import logo from "../assets/rogo.png";
+import mark from "../assets/nand-mark.png";
+import { withBase } from "../lib/url";
+import { navLinks, X_URL } from "../lib/links";
+
+const home = withBase("/");
 ---
 
 <footer class="site-footer">
-  <span class="footer-brand"><Image src={logo} alt="" width={68} />NAND</span>
-  <span>南山大学 学生エンジニア団体</span>
+  <div class="container footer-inner">
+    <a class="footer-brand" href={`${home}#top`}>
+      <span class="brand-mark"><Image src={mark} alt="" width={96} /></span>
+      <span>
+        <strong>NAND</strong>
+        <small>南山大学 学生エンジニア団体</small>
+      </span>
+    </a>
+    <nav class="footer-nav" aria-label="フッターメニュー">
+      {navLinks.map((link) => <a href={`${home}${link.hash}`}>{link.label}</a>)}
+      <a href={X_URL} target="_blank" rel="noreferrer">X（@nandsongen）</a>
+    </nav>
+  </div>
 </footer>
