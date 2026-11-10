@@ -1,0 +1,32 @@
+---
+import SectionHead from "./SectionHead.astro";
+
+const stats = [
+  { value: "2026", label: "Launch year" },
+  { value: "Open", label: "初心者歓迎" },
+  { value: "Build", label: "チーム開発中心" },
+];
+---
+
+<section class="intro band" id="about">
+  <SectionHead eyebrow="About NAND" title="作りながら、学び合う。" />
+  <div class="intro-grid">
+    <p>
+      NANDは、南山大学の学生が立ち上げたエンジニア団体サークルです。Web、アプリ、AI、ゲームなど、技術領域を限定せずに「作りたい」を出発点に活動します。
+    </p>
+    <p>
+      授業だけでは触れにくい開発の進め方、GitHubでの共同制作、発表、ポートフォリオ作りまで、初心者も経験者も一緒に伸びていける場所を目指しています。
+    </p>
+  </div>
+</section>
+
+<section class="stats">
+  {
+    stats.map((stat) => (
+      <div>
+        <strong>{stat.value}</strong>
+        <span>{stat.label}</span>
+      </div>
+    ))
+  }
+</section>

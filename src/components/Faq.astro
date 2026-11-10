@@ -1,0 +1,32 @@
+---
+import SectionHead from "./SectionHead.astro";
+
+const faqs = [
+  {
+    q: "初心者でも参加できますか？",
+    a: "できます。基礎を学びながら、小さな制作物を一緒に完成させるところから始められます。",
+  },
+  {
+    q: "どんな技術を扱いますか？",
+    a: "Web、スマホアプリ、AI、ゲームなど、メンバーの興味に合わせて広げていきます。",
+  },
+  {
+    q: "入会前に見学できますか？",
+    a: "できます。Xから気軽に連絡してください。活動日や場所が決まり次第案内します。",
+  },
+];
+---
+
+<section class="faq band-soft">
+  <SectionHead eyebrow="FAQ" title="よくある質問" />
+  <div class="faq-list">
+    {
+      faqs.map((faq) => (
+        <details>
+          <summary>{faq.q}</summary>
+          <p>{faq.a}</p>
+        </details>
+      ))
+    }
+  </div>
+</section>

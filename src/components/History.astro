@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import SectionHead from "./SectionHead.astro";
+import { withBase } from "../lib/url";
+import { formatDate } from "../lib/date";
+
+const entries = (await getCollection("history", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<section class="projects band-dark" id="history">
+  <SectionHead eyebrow="History" title="過去の活動" />
+  {
+    entries.length > 0 ? (
+      <div class="project-list">
+        {entries.map((entry) => (
+          <a href={withBase(`history/${entry.id}/`)}>
+            <span>{formatDate(entry.data.date)}</span>
+            <strong>{entry.data.title}</strong>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <p class="history-empty">活動記録は準備中です。</p>
+    )
+  }
+</section>
+
+<style>
+  .history-empty {
+    max-width: 860px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.64);
+  }
+</style>

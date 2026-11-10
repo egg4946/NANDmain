@@ -1,0 +1,65 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/rogo.png";
+import { withBase } from "../lib/url";
+
+interface Props {
+  solid?: boolean;
+}
+
+const { solid = false } = Astro.props;
+const home = withBase("/");
+const links = [
+  { href: `${home}#about`, label: "About" },
+  { href: `${home}#activities`, label: "Activities" },
+  { href: `${home}#join`, label: "Join" },
+  { href: `${home}#contact`, label: "Contact" },
+];
+---
+
+<header class:list={["site-header", { "is-scrolled": solid }]} data-header data-solid={solid ? "" : undefined}>
+  <a class="brand" href={`${home}#top`} aria-label="NAND トップへ">
+    <span class="brand-mark"><Image src={logo} alt="" width={88} /></span>
+    <span class="brand-text">NAND</span>
+  </a>
+  <button class="nav-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" data-nav-toggle>
+    <span></span>
+    <span></span>
+  </button>
+  <nav class="site-nav" data-nav>
+    {links.map((link) => <a href={link.href}>{link.label}</a>)}
+  </nav>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-header]")!;
+  const nav = document.querySelector<HTMLElement>("[data-nav]")!;
+  const navToggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]")!;
+  const isSolid = header.hasAttribute("data-solid");
+
+  const syncHeader = () => {
+    if (isSolid) return;
+    header.classList.toggle("is-scrolled", window.scrollY > 18);
+  };
+
+  const closeNav = () => {
+    nav.classList.remove("is-open");
+    navToggle.setAttribute("aria-expanded", "false");
+  };
+
+  syncHeader();
+  window.addEventListener("scroll", syncHeader, { passive: true });
+
+  navToggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  nav.addEventListener("click", closeNav);
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 920) {
+      closeNav();
+    }
+  });
+</script>

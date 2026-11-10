@@ -1,0 +1,35 @@
+---
+import { Image } from "astro:assets";
+import SectionHead from "./SectionHead.astro";
+import activityImage from "../assets/hero-nand.png";
+
+const activities = [
+  { title: "楽しく開発", body: "各自またはグループの制作や学習を進める。詰まったところはその場で相談できます。" },
+  { title: "LT・勉強会", body: "最近学んだ技術、作ったもの、失敗談を短く共有して知識を循環させます。" },
+  { title: "チーム制作", body: "Webサイト、アプリ、ゲーム、ハードウェアなどを企画から公開まで進めます。" },
+  { title: "ハッカソン参加", body: "学外イベントやコンテストにも挑戦し、実践経験とつながりを増やします。" },
+];
+---
+
+<section class="band" id="activities">
+  <SectionHead eyebrow="Activities" title="NANDでできること" />
+  <div class="activity-visual">
+    <Image
+      src={activityImage}
+      alt="学生がノートPCと電子工作を囲んで制作しているイラスト"
+      widths={[640, 1120, 1680]}
+      sizes="(max-width: 1200px) 100vw, 1120px"
+    />
+  </div>
+  <div class="activity-grid">
+    {
+      activities.map((activity, i) => (
+        <article>
+          <span class="card-index">{String(i + 1).padStart(2, "0")}</span>
+          <h3>{activity.title}</h3>
+          <p>{activity.body}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>

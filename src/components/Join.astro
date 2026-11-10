@@ -1,0 +1,42 @@
+---
+import SectionHead from "./SectionHead.astro";
+
+const checks = [
+  "南山大学の学生なら学年・学部を問わず歓迎",
+  "PCを持っていればすぐ参加可能",
+  "見学、相談、共同制作の持ち込みも歓迎",
+];
+
+const schedule = [
+  { term: "形式", detail: "対面 + オンライン" },
+  { term: "頻度", detail: "週1回を目安に調整中" },
+  { term: "場所", detail: "南山大学キャンパス内" },
+];
+---
+
+<section class="join band" id="join">
+  <SectionHead eyebrow="Join NAND" title="経験より、作ってみたい気持ち。" />
+  <div class="join-layout">
+    <div class="join-copy">
+      <p>
+        プログラミング経験の有無は問いません。最初はHTML/CSSやPythonの基礎からでも大丈夫です。経験者は、チーム開発や外部イベントでさらに腕を伸ばせます。
+      </p>
+      <ul class="check-list">
+        {checks.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+    <aside class="schedule">
+      <h3>活動予定</h3>
+      <dl>
+        {
+          schedule.map((row) => (
+            <div>
+              <dt>{row.term}</dt>
+              <dd>{row.detail}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </aside>
+  </div>
+</section>

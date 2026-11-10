@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "../assets/head.png";
+import { X_URL } from "../lib/links";
+---
+
+<section class="hero">
+  <Image
+    class="hero-image"
+    src={heroImage}
+    alt="NANDのロゴと回路をモチーフにしたキービジュアル"
+    widths={[640, 1280, 1920]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="hero-content">
+    <h1>NAND</h1>
+    <p class="hero-copy">
+      南山大学で生まれた、学生エンジニアのための制作コミュニティ。
+      コードを書き、手を動かし、仲間と一緒にプロダクトを形にします。
+    </p>
+    <div class="hero-actions">
+      <a class="button primary" href="#join">参加について見る</a>
+      <a class="button ghost" href={X_URL} target="_blank" rel="noreferrer">Xをフォロー</a>
+    </div>
+  </div>
+</section>
