@@ -4,7 +4,7 @@
 
 ## 開発の始め方
 
-Node.js 22 以上が必要です。
+Node.js 22.23 以上（24 推奨）が必要です。
 
 ```bash
 npm install
